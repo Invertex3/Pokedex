@@ -24,10 +24,10 @@ const GamePage = () => {
               How to Play
             </h4>
             <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-              <li>• Look at the Pokemon silhouette</li>
-              <li>• Choose from 4 possible names</li>
-              <li>• Get 10 guesses to score as high as possible</li>
-              <li>• Correct answers earn 1 point</li>
+              <li> Look at the Pokemon silhouette</li>
+              <li> Choose from 4 possible names</li>
+              <li> Get 10 guesses to score as high as possible</li>
+              <li> Correct answers earn 1 point</li>
             </ul>
           </div>
 
@@ -36,10 +36,10 @@ const GamePage = () => {
               Tips
             </h4>
             <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-              <li>• Pay attention to the silhouette shape</li>
-              <li>• Consider the Pokemon's generation</li>
-              <li>• Eliminate obviously wrong answers first</li>
-              <li>• Practice makes perfect!</li>
+              <li> Pay attention to the silhouette shape</li>
+              <li> Consider the Pokemon's generation</li>
+              <li> Eliminate obviously wrong answers first</li>
+              <li> Practice makes perfect!</li>
             </ul>
           </div>
 
@@ -48,10 +48,10 @@ const GamePage = () => {
               Game Features
             </h4>
             <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-              <li>• Random Pokemon from Gen 1</li>
-              <li>• 10 rounds per game</li>
-              <li>• Instant feedback on answers</li>
-              <li>• Final score and performance rating</li>
+              <li> Random Pokemon from Gen 1</li>
+              <li> 10 rounds per game</li>
+              <li> Instant feedback on answers</li>
+              <li> Final score and performance rating</li>
             </ul>
           </div>
         </div>

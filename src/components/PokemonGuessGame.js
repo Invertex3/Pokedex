@@ -10,43 +10,43 @@ const PokemonGuessGame = () => {
   const [totalGuesses, setTotalGuesses] = useState(0);
   const [loading, setLoading] = useState(true);
   const [gameOver, setGameOver] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
-  // 👇 NEW: control whether to show silhouette or reveal full sprite
   const isRevealed = selectedAnswer !== null || gameOver;
+
+  const silhouetteStyle = {
+    filter: isRevealed ? 'none' : 'brightness(0) saturate(100%) contrast(200%)',
+    transition: 'filter 500ms ease'
+  };
 
   const startNewRound = async () => {
     setLoading(true);
     setSelectedAnswer(null);
-    
+    setFeedback("");
+
     try {
-      // Get a random Pokémon from first 151
       const randomId = Math.floor(Math.random() * 151) + 1;
       const randomPokemon = await getPokemonById(randomId);
-      
-      // Get 3 other random Pokémon for options
+
       const otherIds = new Set();
       while (otherIds.size < 3) {
         const id = Math.floor(Math.random() * 151) + 1;
-        if (id !== randomId) {
-          otherIds.add(id);
-        }
+        if (id !== randomId) otherIds.add(id);
       }
-      
+
       const otherPokemon = await Promise.all(
         Array.from(otherIds).map(id => getPokemonById(id))
       );
-      
-      // Combine and shuffle options
+
       const allOptions = [
         { ...randomPokemon, isCorrect: true },
         ...otherPokemon.map(p => ({ ...p, isCorrect: false }))
       ].sort(() => Math.random() - 0.5);
-      
+
       setPokemon(randomPokemon);
       setOptions(allOptions);
     } catch (error) {
       console.error('Error starting new round:', error);
-      // Retry with a different Pokémon
       setTimeout(startNewRound, 1000);
     } finally {
       setLoading(false);
@@ -59,14 +59,17 @@ const PokemonGuessGame = () => {
 
   const handleAnswer = (option) => {
     if (selectedAnswer || gameOver) return;
-    
+
     setSelectedAnswer(option);
     setTotalGuesses(prev => prev + 1);
-    
+
     if (option.isCorrect) {
       setScore(prev => prev + 1);
+      setFeedback("You are correct!");
+    } else {
+      setFeedback(`Wrong! The correct answer is ${pokemon.name}.`);
     }
-    
+
     setTimeout(() => {
       if (totalGuesses + 1 >= 10) {
         setGameOver(true);
@@ -120,16 +123,14 @@ const PokemonGuessGame = () => {
         <span>Score: {score}</span>
       </div>
 
+      {/* Pokémon image with silhouette before reveal */}
       <div className="flex justify-center">
         <div className="w-48 h-48 bg-black/5 dark:bg-white/5 rounded-2xl flex items-center justify-center">
           <img
             src={pokemon.sprites?.front_default}
             alt={isRevealed ? pokemon.name : "Who's that Pokémon?"}
-            className={
-              `w-40 h-40 object-contain transition-all duration-500 ` +
-              // 👇 silhouette before answer, normal after answer
-              (!isRevealed ? 'filter brightness-0 contrast-200' : '')
-            }
+            className="w-40 h-40 object-contain"
+            style={silhouetteStyle}
           />
         </div>
       </div>
@@ -140,9 +141,12 @@ const PokemonGuessGame = () => {
             key={option.id}
             onClick={() => handleAnswer(option)}
             disabled={selectedAnswer !== null}
-            className="w-full py-4 px-6 rounded-lg font-semibold text-lg capitalize
-                     bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700
-                     disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className={`w-full rounded-lg font-semibold text-lg capitalize
+                        transition-all
+                        ${selectedAnswer && option.isCorrect ? 'border-2 border-green-500' : ''}
+                        ${selectedAnswer && !option.isCorrect && selectedAnswer === option ? 'border-2 border-red-500' : ''}
+                        bg-gray-100 hover:bg-gray-200
+                        dark:bg-transparent dark:hover:bg-transparent`}
           >
             <div className="flex items-center justify-between">
               <span>{option.name}</span>
@@ -155,6 +159,12 @@ const PokemonGuessGame = () => {
           </button>
         ))}
       </div>
+
+      {feedback && (
+        <p className="mt-4 text-lg font-semibold text-gray-700 dark:text-gray-300">
+          {feedback}
+        </p>
+      )}
     </div>
   );
 };
