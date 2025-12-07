@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import HomePage from './HomePage';
 import PokemonDetailPage from './PokemonDetailPage';
-import GamePage from '/GamePage';
-import ThemeToggle from '/ThemeToggle';
+import GamePage from './gamepage.js';
+import ThemeToggle from './themetoggle.js';
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');

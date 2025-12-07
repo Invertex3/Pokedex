@@ -4,7 +4,7 @@ import { FiArrowLeft, FiExternalLink } from 'react-icons/fi';
 import { getPokemonById, getPokemonSpecies, getEvolutionChain } from './pokeapi';
 import StatsChart from './StatsChart';
 import EvolutionChain from './EvolutionChain';
-import ImageCarousel from '/ImageCarousel';
+import ImageCarousel from './imagecarousel.js';
 import MovesList from './MovesList';
 
 const PokemonDetailPage = () => {

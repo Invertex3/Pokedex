@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PokemonCard from '/PokemonCard';
+import PokemonCard from './pokemoncard.js';
 import SearchBar from './SearchBar';
-import Pagination from '/Pagination';
+import Pagination from './pagination.js';
 import { getPokemonList } from './pokeapi';
 
 const HomePage = () => {
