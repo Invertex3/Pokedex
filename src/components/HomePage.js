@@ -56,7 +56,7 @@ const HomePage = () => {
           Discover Pokemon
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          Browse through {totalPages * pokemonPerPage} Pokemon with detailed information
+          Browse through 1025 Pokemon with detailed information
         </p>
         
         <SearchBar onSearch={handleSearch} />
