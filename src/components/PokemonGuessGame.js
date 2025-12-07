@@ -11,6 +11,9 @@ const PokemonGuessGame = () => {
   const [loading, setLoading] = useState(true);
   const [gameOver, setGameOver] = useState(false);
 
+  // 👇 NEW: control whether to show silhouette or reveal full sprite
+  const isRevealed = selectedAnswer !== null || gameOver;
+
   const startNewRound = async () => {
     setLoading(true);
     setSelectedAnswer(null);
@@ -121,8 +124,12 @@ const PokemonGuessGame = () => {
         <div className="w-48 h-48 bg-black/5 dark:bg-white/5 rounded-2xl flex items-center justify-center">
           <img
             src={pokemon.sprites?.front_default}
-            alt="Pokemon silhouette"
-            className="w-40 h-40 object-contain filter brightness(0) invert"
+            alt={isRevealed ? pokemon.name : "Who's that Pokémon?"}
+            className={
+              `w-40 h-40 object-contain transition-all duration-500 ` +
+              // 👇 silhouette before answer, normal after answer
+              (!isRevealed ? 'filter brightness-0 contrast-200' : '')
+            }
           />
         </div>
       </div>

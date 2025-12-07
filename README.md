@@ -31,7 +31,6 @@ npm install
 # Start development server
 npm start
 ```
-
 The app will open at `http://localhost:3000/Pokedex`
 
 ### Build for Production

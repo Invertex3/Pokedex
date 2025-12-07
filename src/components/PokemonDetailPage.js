@@ -90,7 +90,6 @@ const PokemonDetailPage = () => {
       >
         <FiArrowLeft className="w-5 h-5" />
       </button>
-
       {/* Pokemon Header */}
       <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 
                     rounded-2xl p-8 mb-8">
@@ -109,7 +108,7 @@ const PokemonDetailPage = () => {
           </div>
 
           {/* Info */}
-          <div className="flex-grow">
+            <div className="flex-grow">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h1 className="text-4xl font-bold text-gray-800 dark:text-white capitalize">
