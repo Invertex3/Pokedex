@@ -95,7 +95,7 @@ function App() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>© 2024 Pokedex Website. Made for educational purposes.</p>
+            <p>© 2025 Pokedex Website. Made for educational purposes.</p>
           </div>
         </div>
       </footer>
